@@ -1,0 +1,16 @@
+using system ;
+name space pallavi
+{
+	class Defination1{
+		string void main(string[] args)
+		{
+		console.writeline("kandregula pallavi");
+		console.writeline("result of 3  sem");
+		console.writeline("1Java-fail);
+		console.writeline("2MIs-pass");
+		console.writeline("3dbms2-pass");
+		console.writeline("4ls-pass");
+		console.writeline("5ds-pass");
+		}
+	}
+}
