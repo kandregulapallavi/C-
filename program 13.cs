@@ -1,47 +1,32 @@
 ﻿using System;
 
-class Rectangle
-{
-	double length;
-	double width;
-
-	public Rectangle()
-	{
-		length = 0;
-		width = 0;
-	}
-
-	public Rectangle(double l, double w)
-	{
-		length = l;
-		width = w;
-	}
-
-	public double FindArea()
-	{
-		return length * width;
-	}
-
-	public void Display()
-	{
-		Console.WriteLine("Length: " + length);
-		Console.WriteLine("Width: " + width);
-		Console.WriteLine("Area: " + FindArea());
-	}
-}
-
 class Program
 {
-	static void Main(string[] args)
+	static void Main()
 	{
-		Rectangle r1 = new Rectangle();
-		Console.WriteLine("Rectangle 1 (Default Constructor)");
-		r1.Display();
+		int[] numbers = new int[8];
+		int positive = 0, negative = 0;
 
-		Rectangle r2 = new Rectangle(10, 5);
-		Console.WriteLine("\nRectangle 2 (Parameterized Constructor)");
-		r2.Display();
+		Console.WriteLine("Enter 8 numbers:");
 
-		Console.ReadLine();
+		for (int i = 0; i < 8; i++)
+		{
+			numbers[i] = Convert.ToInt32(Console.ReadLine());
+		}
+
+		for (int i = 0; i < 8; i++)
+		{
+			if (numbers[i] > 0)
+			{
+				positive++;
+			}
+			else if (numbers[i] < 0)
+			{
+				negative++;
+			}
+		}
+
+		Console.WriteLine("Positive numbers count: " + positive);
+		Console.WriteLine("Negative numbers count: " + negative);
 	}
 }
