@@ -1,0 +1,135 @@
+using System;
+using System.Collections.Generic;
+
+class Program
+{
+    // Menu class
+    class MenuItem
+    {
+        public int Id;
+        public string Name;
+        public int Price;
+    }
+
+    // Order class
+    class Order
+    {
+        public string ItemName;
+        public int Quantity;
+        public int TotalPrice;
+    }
+
+    static List<MenuItem> menu = new List<MenuItem>()
+    {
+        new MenuItem { Id = 1, Name = "Pizza", Price = 250 },
+        new MenuItem { Id = 2, Name = "Burger", Price = 120 },
+        new MenuItem { Id = 3, Name = "Pasta", Price = 180 },
+        new MenuItem { Id = 4, Name = "Sandwich", Price = 90 }
+    };
+
+    static List<Order> orders = new List<Order>();
+
+    static void Main()
+    {
+        int choice;
+
+        do
+        {
+            Console.WriteLine("\n===== ONLINE FOOD ORDERING SYSTEM =====");
+            Console.WriteLine("1. View Menu");
+            Console.WriteLine("2. Place Order");
+            Console.WriteLine("3. View Orders");
+            Console.WriteLine("4. Exit");
+            Console.Write("Enter choice: ");
+
+            choice = Convert.ToInt32(Console.ReadLine());
+
+            switch (choice)
+            {
+                case 1:
+                    ShowMenu();
+                    break;
+
+                case 2:
+                    PlaceOrder();
+                    break;
+
+                case 3:
+                    ShowOrders();
+                    break;
+
+                case 4:
+                    Console.WriteLine("Thank you for using the system!");
+                    break;
+
+                default:
+                    Console.WriteLine("Invalid choice!");
+                    break;
+            }
+
+        } while (choice != 4);
+    }
+
+    static void ShowMenu()
+    {
+        Console.WriteLine("\n--- MENU ---");
+        foreach (var item in menu)
+        {
+            Console.WriteLine($"{item.Id}. {item.Name} - ₹{item.Price}");
+        }
+    }
+
+    static void PlaceOrder()
+    {
+        ShowMenu();
+
+        Console.Write("\nEnter Item ID: ");
+        int id = Convert.ToInt32(Console.ReadLine());
+
+        MenuItem selected = menu.Find(x => x.Id == id);
+
+        if (selected == null)
+        {
+            Console.WriteLine(" Invalid item!");
+            return;
+        }
+
+        Console.Write("Enter Quantity: ");
+        int qty = Convert.ToInt32(Console.ReadLine());
+
+        int total = selected.Price * qty;
+
+        orders.Add(new Order
+        {
+            ItemName = selected.Name,
+            Quantity = qty,
+            TotalPrice = total
+        });
+
+        Console.WriteLine("\n Order Placed Successfully!");
+        Console.WriteLine($"Item: {selected.Name}");
+        Console.WriteLine($"Total Amount: ₹{total}");
+    }
+
+    static void ShowOrders()
+    {
+        Console.WriteLine("\n--- ORDER HISTORY ---");
+
+        if (orders.Count == 0)
+        {
+            Console.WriteLine("No orders yet.");
+            return;
+        }
+
+        int grandTotal = 0;
+
+        foreach (var order in orders)
+        {
+            Console.WriteLine($"{order.ItemName} | Qty: {order.Quantity} | Total: ₹{order.TotalPrice}");
+            grandTotal += order.TotalPrice;
+        }
+
+        Console.WriteLine("-------------------------");
+        Console.WriteLine($"Grand Total: ₹{grandTotal}");
+    }
+}
